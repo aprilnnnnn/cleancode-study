@@ -22,9 +22,4 @@ public abstract class AbstractPaymentClassification implements PaymentClassifica
     @GeneratedValue
     private Integer classificationId;
 
-    boolean isInPayPeriod(@NonNull Date payDate, @NonNull Paycheck pc) {
-        return DateUtils.between(payDate, pc.getPayPeriodStartDate(), pc.getPayPeriodEndDate());
-    }
-
-
 }

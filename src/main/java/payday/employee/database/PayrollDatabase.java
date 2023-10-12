@@ -42,4 +42,7 @@ public class PayrollDatabase {
     public void deleteUnionMember(int memberId) {
         unionMembers.remove(memberId);
     }
+    public Map<Integer, Employee> getAllEmployees() {
+        return employee;
+    }
 }

@@ -2,6 +2,7 @@ package payday.employee.classification;
 
 import lombok.*;
 import payday.Paycheck;
+import payday.util.DateUtils;
 
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @DiscriminatorValue("H")
@@ -61,5 +63,9 @@ public class HourlyClassification extends AbstractPaymentClassification {
         final double overtime = Math.max(0.0, hours - OVERTIME_LIMIT_HOURS);
         final double straightTime = hours - overtime;
         return (straightTime * rate) + (overtime * rate * OVERTIME_RATE);
+    }
+
+    boolean isInPayPeriod(@NonNull Date payDate, @NonNull Paycheck pc) {
+        return DateUtils.between(payDate, pc.getPayPeriodStartDate(), pc.getPayPeriodEndDate());
     }
 }
